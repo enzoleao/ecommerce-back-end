@@ -1,8 +1,8 @@
-export interface createUserRequestDTO {
-    email: string,
-    name: string,
-    username: string,
-    number: string,
-    password: string,
-    birthday: any,
+export interface CreateUserRequestDTO {
+  name: string;
+  email: string;
+  phone: string;
+  cpf: string;
+  birthday: any;
+  password: string;
 }

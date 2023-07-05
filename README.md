@@ -21,36 +21,19 @@ API em Node.js para um aplicativo de memórias
 
 ---
 
-### Features
+#### Start
+```bash
+	yarn
+
+	yarn run dev
+
+```
 #### Rotas
 
 ##### Users
 
 - [x] GET /users  📚
 - [x] POST /users 📚
-- [x] POST /sessions 📚
-- [x] GET /me 📚
-- [x] PUT /avatar/{userId} 📚
-
-
-##### Memorias
-- [x] GET /memories 📚
-- [x] POST /memories 📚
-- [x] PUT /memories📚
-- [x] DELETE /memories 📚
-
-##### Midias
-- [x] POST /medias 📚
-- [x] DELETE /medias📚
-
-##### Adicionar e/ou remover usuários da memória
-- [x] POST /usersinmemory 📚
-- [x] DELETE /usersinmemory 📚
-
-##### Reflexões da memória
-- [x] POST /reflections 📚
-- [x] PUT /reflections
-- [x] DELETE /reflections 📚
 
 
 #### Funcionalidades

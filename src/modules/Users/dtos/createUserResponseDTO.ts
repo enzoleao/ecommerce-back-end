@@ -1,8 +1,8 @@
-export interface createUserResponseDTO {
-    id: string
-    email: string
-    name: string | null
-    number: string | null
-    username: string
-    birthday: Date
+export interface CreateUserResponseDTO {
+  id: string;
+  name: string;
+  email: string;
+  phone: string | null;
+  cpf: string;
+  birthday: any;
 }
