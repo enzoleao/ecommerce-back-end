@@ -1,6 +1,6 @@
 <h1 align="center">Back end do aplicativo memories</h1>
 <p align="center">API em Node.js para um aplicativo de gerenciamento de memórias</p>
-<img src="https://img.shields.io/badge/NODEJS-WORK-green">
+<img src="https://img.shields.io/badge/Express-WORK-green">
 
 # Lista de conteúdos
 
@@ -17,7 +17,7 @@
 
 ### 💻 Sobre
 
-API em Node.js para um aplicativo de memórias
+API em Node.js utilizando Express para um aplicativo de ecommerce
 
 ---
 
@@ -39,14 +39,6 @@ API em Node.js para um aplicativo de memórias
 #### Funcionalidades
 - [x] Integração com banco de dados PostgreSQL
 - [x] Registro de usuário
-- [x] Rota de autenticação0 de usuário
-- [x] Atualização de avatar do usuário
-- [x] Criação de memória
-- [x] Atualização de memória
-- [x] Rota para adicionar mídias a memória
-- [x] Rota para deletar mídias da memória.
-- [x] Registro de usuário
-- [x] Autenticação das rotas
 
 
 ### 🛠 Tecnologias
