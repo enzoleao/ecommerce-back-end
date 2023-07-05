@@ -22,9 +22,9 @@ export class UserRepository implements IUserRepository {
     });
     if (findUser) {
       const response =
-        findUser.email === user.email
-          ? "Este email já esta cadastrado"
-          : "Este CPF já esta cadastrado";
+        findUser.email === user.email && findUser.cpf === user.cpf
+          ? ["Este email já esta cadastrado", "Este CPF já esta cadastrado"]
+          : ["Este CPF já esta cadastrado"];
       throw new AppError(response, 400);
     }
     const response = await prisma.user.create({

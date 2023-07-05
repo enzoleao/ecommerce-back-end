@@ -62,7 +62,7 @@
               }
             },
             "400": {
-              "description": "Usuário já foi cadastrado."
+              "description": "Este email já esta cadastrado || Este CPF já esta cadastrado."
             },
             "500": {
               "description": "Erro servidor."
@@ -76,35 +76,35 @@
         "RegisterUserRequest": {
           "type": "object",
           "properties": {
-            "email": {
-              "description": "E-mail do usuário que será criado.",
-              "type": "string",
-              "example": "enzopinheiro6@gmail.com"
-            },
             "name": {
               "description": "Nome completo do usuário que será criado.",
               "type": "string",
               "example": "Enzo Gabriel Pinheiro de Leão"
             },
-            "username": {
-              "description": "Nome de usuário que será identificado no @.",
+            "email": {
+              "description": "E-mail do usuário que será criado.",
               "type": "string",
-              "example": "enzoleao22"
+              "example": "enzopinheiro6@gmail.com"
             },
-            "number": {
+            "phone": {
               "description": "Número do usuário.",
               "type": "string",
               "example": "91991611201"
             },
             "birthday": {
-              "description": "Senha do usuario que vai se cadastrar.",
+              "description": "Data de nascimento do usuário que vai se cadastrar.",
               "type": "string",
               "example": "2011-10-05T14:48:00.000Z"
+            },
+            "cpf": {
+              "description": "CPF do usuario que vai se cadastrar.",
+              "type": "string",
+              "example": "23939482382"
             },
             "password": {
               "description": "Senha do usuario que vai se cadastrar.",
               "type": "string",
-              "example": "default32312"
+              "example": "Enzo123"
             }
           },
           "required": [
@@ -132,25 +132,20 @@
               "type": "string",
               "example": "enzopinheiro6@gmail.com"
             },
-            "avatar": {
-              "description": "Avatar do usuario.",
-              "type": "string",
-              "example": null
-            },
-            "username": {
-              "description": "Nome de usuário @.",
-              "type": "string",
-              "example": "enzoleao22"
-            },
-            "number": {
+            "phone": {
               "description": "Numero do usuário.",
               "type": "string",
               "example": "9199161210"
             },
             "birthday": {
-              "description": "Avatar do usuario.",
+              "description": "Data de nascimento do usuario.",
               "type": "datetime",
-              "example": "2011-10-05T14:48:00.000Z"
+              "example": "2002-01-12T00:00:00.000Z"
+            },
+            "cpf": {
+              "description": "Avatar do usuario.",
+              "type": "string",
+              "example": "23939482382"
             }
           }
         },
