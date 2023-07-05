@@ -1,5 +1,5 @@
-<h1 align="center">Back end do aplicativo memories</h1>
-<p align="center">API em Node.js para um aplicativo de gerenciamento de memórias</p>
+<h1 align="center">Back End para E-commerce</h1>
+<p align="center">API em Node.js para um E-commerce</p>
 <img src="https://img.shields.io/badge/Express-WORK-green">
 
 # Lista de conteúdos
