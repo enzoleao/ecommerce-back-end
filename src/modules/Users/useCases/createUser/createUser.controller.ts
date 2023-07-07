@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { CreateUserRequestDTO } from "../../dtos/createUserRequestDTO";
+import { CreateUserRequestDTO } from "../../dtos/createUser/createUserRequestDTO";
 import { CreateUserUseCase } from "./createUser.usecase";
 import { UserRepository } from "../../repositories/implementations/User.repository";
 

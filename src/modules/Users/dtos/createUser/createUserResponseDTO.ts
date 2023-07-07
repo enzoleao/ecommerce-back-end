@@ -5,4 +5,5 @@ export interface CreateUserResponseDTO {
   phone: string | null;
   cpf: string;
   birthday: any;
+  password: undefined;
 }

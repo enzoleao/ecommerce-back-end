@@ -1,20 +1,29 @@
 import { prisma } from "../../../../prisma";
 import { IUserRepository } from "../User.repository";
-import { CreateUserRequestDTO } from "../../dtos/createUserRequestDTO";
-import { CreateUserResponseDTO } from "../../dtos/createUserResponseDTO";
+import { CreateUserRequestDTO } from "../../dtos/createUser/createUserRequestDTO";
+import { CreateUserResponseDTO } from "../../dtos/createUser/createUserResponseDTO";
 import { AppError } from "../../../../err/AppError";
+import { GetAllUsersDTO } from "../../dtos/getAllUsers/getAllUsersDTO";
+import { User } from "@prisma/client";
 
 export class UserRepository implements IUserRepository {
-  async get(): Promise<CreateUserResponseDTO[] | null> {
+  async findUser(email: string): Promise<User | null> {
+    const response = await prisma.user.findUniqueOrThrow({
+      where: {
+        email,
+      },
+    });
+    return response;
+  }
+
+  async get(): Promise<GetAllUsersDTO[] | null> {
     const response = await prisma.user.findMany();
     return response.map((i) => {
       return { ...i, password: undefined };
     });
   }
 
-  async create(
-    user: CreateUserRequestDTO
-  ): Promise<CreateUserResponseDTO | null> {
+  async create(user: CreateUserRequestDTO): Promise<CreateUserResponseDTO> {
     const findUser = await prisma.user.findFirst({
       where: {
         OR: [{ email: user.email }, { cpf: user.cpf }],
@@ -30,6 +39,6 @@ export class UserRepository implements IUserRepository {
     const response = await prisma.user.create({
       data: user,
     });
-    return response;
+    return { ...response, password: undefined };
   }
 }
