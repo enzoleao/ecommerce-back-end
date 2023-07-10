@@ -7,7 +7,6 @@ import { AppError } from "./err/AppError";
 import swaggerUi from "swagger-ui-express";
 import swaggerDocument from "./swagger.json";
 import { config } from "express-acl";
-import { EnsureAuthenticateMiddleware } from "./middleware/ensureAuthenticated.middleware";
 
 dotenv.config();
 const app = express();
@@ -24,7 +23,7 @@ config({
 app.use(express.json());
 app.use(cors());
 app.use(Routes);
-app.use(EnsureAuthenticateMiddleware);
+
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.get("/swagger", (request: Request, response: Response) => {

@@ -20,12 +20,11 @@ export const EnsureAuthenticateMiddleware = (
 
   const routesIgnoredByJWT = [{ path: "/users", methods: ["POST"] }];
 
-  const routesignored = routesIgnoredByJWT.find((rota) => {
+  const isRouteIgnored = routesIgnoredByJWT.find((rota) => {
     return rota.path === req.path && rota.methods.includes(req.method);
   });
-  if (routesignored !== undefined) {
-    console.log("esta indo");
-    next();
+  if (isRouteIgnored) {
+    return next();
   }
   if (!authorization) {
     throw new AppError([{ msg: "Token Missing!", path: "authorization" }], 401);

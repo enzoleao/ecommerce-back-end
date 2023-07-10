@@ -21,7 +21,7 @@ export class AuthUserUseCase {
         400
       );
     }
-    console.log(userExist);
+
     const passwordMatch = compare(password, userExist.password);
     if (!passwordMatch) {
       throw new AppError(
@@ -29,7 +29,7 @@ export class AuthUserUseCase {
         400
       );
     }
-    console.log(userExist);
+
     const token = sign(
       {
         id: userExist.id,
