@@ -18,6 +18,15 @@ export const EnsureAuthenticateMiddleware = (
 ) => {
   const { authorization } = req.headers;
 
+  const routesIgnoredByJWT = [{ path: "/users", methods: ["POST"] }];
+
+  const routesignored = routesIgnoredByJWT.find((rota) => {
+    return rota.path === req.path && rota.methods.includes(req.method);
+  });
+  if (routesignored !== undefined) {
+    console.log("esta indo");
+    next();
+  }
   if (!authorization) {
     throw new AppError([{ msg: "Token Missing!", path: "authorization" }], 401);
   }
@@ -26,7 +35,6 @@ export const EnsureAuthenticateMiddleware = (
 
   if (tokenDecoded) {
     req.user = tokenDecoded;
-    console.log(req.user);
     next();
   } else {
     throw new AppError([{ msg: "Invalid Token!", path: "authorization" }], 401);
