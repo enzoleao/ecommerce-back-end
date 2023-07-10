@@ -1,7 +1,9 @@
 import { User } from "@prisma/client";
-import { CreateUserRequestDTO } from "../dtos/createUser/createUserRequestDTO";
-import { CreateUserResponseDTO } from "../dtos/createUser/createUserResponseDTO";
-import { GetAllUsersDTO } from "../dtos/getAllUsers/getAllUsersDTO";
+import {
+  CreateUserRequestDTO,
+  CreateUserResponseDTO,
+} from "../dtos/createUserDTO";
+import { GetAllUsersDTO } from "../dtos/getAllUsersDTO";
 
 export interface IUserRepository {
   create(user: CreateUserRequestDTO): Promise<CreateUserResponseDTO | null>;

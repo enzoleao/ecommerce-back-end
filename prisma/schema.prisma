@@ -19,7 +19,7 @@ model User {
   cpf String @unique
   password String 
   address Address[]
-  roleId Int @unique @map("role_id") @default(0)
+  roleId Int @map("role_id") @default(0)
 
   roles Roles @relation(fields: [roleId], references: [id])
 }

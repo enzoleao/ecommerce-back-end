@@ -1,0 +1,37 @@
+[
+  {
+    "group": "admin",
+    "permissions": [
+      {
+        "resource": "*",
+        "methods": "*",
+        "action": "deny"
+      }
+    ]
+  },
+  {
+    "group": "user",
+    "permissions": [
+      {
+        "resource": "session",
+        "methods": ["*"],
+        "action": "deny"
+      },
+      {
+        "resource": ["users"],
+        "methods": ["GET", "POST", "DELETE"],
+        "action": "allow"
+      }
+    ]
+  },
+  {
+    "group": "anonymous",
+    "permissions": [
+      {
+        "resource":["session"],
+        "methods": ["POST"],
+        "action": "allow"
+      }
+    ]
+  }
+]

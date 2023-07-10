@@ -1,9 +1,11 @@
 import { prisma } from "../../../../prisma";
 import { IUserRepository } from "../User.repository";
-import { CreateUserRequestDTO } from "../../dtos/createUser/createUserRequestDTO";
-import { CreateUserResponseDTO } from "../../dtos/createUser/createUserResponseDTO";
+import {
+  CreateUserRequestDTO,
+  CreateUserResponseDTO,
+} from "../../dtos/createUserDTO";
 import { AppError } from "../../../../err/AppError";
-import { GetAllUsersDTO } from "../../dtos/getAllUsers/getAllUsersDTO";
+import { GetAllUsersDTO } from "../../dtos/getAllUsersDTO";
 import { User } from "@prisma/client";
 
 export class UserRepository implements IUserRepository {
@@ -11,6 +13,9 @@ export class UserRepository implements IUserRepository {
     const response = await prisma.user.findUniqueOrThrow({
       where: {
         email,
+      },
+      include: {
+        roles: true,
       },
     });
     return response;
@@ -30,11 +35,13 @@ export class UserRepository implements IUserRepository {
       },
     });
     if (findUser) {
-      const response =
-        findUser.email === user.email && findUser.cpf === user.cpf
-          ? ["Este email já esta cadastrado", "Este CPF já esta cadastrado"]
-          : ["Este CPF já esta cadastrado"];
-      throw new AppError(response, 400);
+      throw new AppError(
+        [
+          { msg: "Este e-mail já possui cadastro", path: "email" },
+          { msg: "Este CPF já possui cadastro", path: "cpf" },
+        ],
+        400
+      );
     }
     const response = await prisma.user.create({
       data: user,

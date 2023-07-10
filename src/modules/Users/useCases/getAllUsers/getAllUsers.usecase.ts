@@ -1,5 +1,5 @@
 import { IUserRepository } from "../../repositories/User.repository";
-import { GetAllUsersDTO } from "../../dtos/getAllUsers/getAllUsersDTO";
+import { GetAllUsersDTO } from "../../dtos/getAllUsersDTO";
 
 export class GetAllUsersUseCase {
   constructor(private userRepository: IUserRepository) {}

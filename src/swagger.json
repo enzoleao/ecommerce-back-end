@@ -10,6 +10,42 @@
       "version": "1.0.0"
     },
     "paths": {
+      "/session": {
+        "post": {
+          "description": "Realizar autenticação do usuário na aplicação",
+          "tags": [
+            "Usuários"
+          ],
+          "requestBody": {
+            "description": "Dados necessários para a autenticação de um usuário",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthUserRequest"
+                }
+              }
+            }
+          },
+          "responses": {
+            "201": {
+              "description": "Usuário autenticado com sucesso.",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/AuthUserResponse"
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Este email já esta cadastrado || Este CPF já esta cadastrado."
+            },
+            "500": {
+              "description": "Erro servidor."
+            }
+          }
+        }
+      },
       "/users": {
         "get": {
           "description": "Retorna todos os usuários da aplicação",
@@ -80,6 +116,79 @@
     },
     "components": {
       "schemas": {
+        "AuthUserRequest": {
+          "type": "object",
+          "properties": {
+            "email": {
+              "description": "E-mail do usuário.",
+              "type": "string",
+              "example": "enzopinheiro6@gmail.com"
+            },
+            "password": {
+              "description": "Senha do usuario.",
+              "type": "string",
+              "example": "Enzo123"
+            }
+          },
+          "required": [
+            "email",
+            "password"
+          ]
+        },
+        "AuthUserResponse": {
+          "type": "object",
+          "properties": {
+            "user": {
+              "type": "object",
+              "properties":{
+                "id": {
+                  "description":"Identificador unico do usuário autenticado",
+                  "type":"string",
+                  "example":"9eb4726e-8a23-4116-b339-eac39ae665d4"
+                },
+                "name": {
+                  "description":"Nome do usuário autenticado",
+                  "type":"string",
+                  "example":"Enzo Gabriel Pinheiro de Leao"
+                },
+                "email": {
+                  "description":"Email do usuário autenticado",
+                  "type":"string",
+                  "example":"enzopinheiro6@gmail.com"
+                },
+                "phone": {
+                  "description":"Telefone do usuário autenticado",
+                  "type":"string",
+                  "example":"91991611201"
+                },
+                "birthday": {
+                  "description":"Data de nascimento do usuário autenticado",
+                  "type":"string",
+                  "example":"2002-01-12T00:00:00.000Z"
+                },
+                "cpf": {
+                  "description":"CPF do usuário autenticado",
+                  "type":"string",
+                  "example":"02401417257"
+                },
+                "roleId": {
+                  "description":"Nivel de permissões do usuário autenticado",
+                  "type":"number",
+                  "example":"0"
+                }
+              }
+            },
+            "token": {
+              "description": "Token JWT de autenticação para acesso aos endpoints.",
+              "type": "string",
+              "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2ODg2OTk3OTcsImV4cCI6MTY4ODcwNjk5Nywic3ViIjoiOWViNDcyNmUtOGEyMy00MTE2LWIzMzktZWFjMzlhZTY2NWQ0In0.kKldIjcyMImxgxuke2pX-VP0lG2a9h3L3eqpC1qtSIc"
+            }
+          },
+          "required": [
+            "email",
+            "password"
+          ]
+        },
         "RegisterUserRequest": {
           "type": "object",
           "properties": {
@@ -117,7 +226,9 @@
           "required": [
             "email",
             "name",
-            "password"
+            "password",
+            "birthday",
+            "cpf"
           ]
         },
         "RegisterUserResponse": {

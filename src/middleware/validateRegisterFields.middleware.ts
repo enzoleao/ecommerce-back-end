@@ -1,10 +1,7 @@
 import { NextFunction, Response, Request } from "express";
 
-const { body, validationResult } = require("express-validator");
-type ErrorResponse = {
-  msg: string;
-  path: string;
-};
+import { body, validationResult } from "express-validator";
+
 export const validateRegisterFields = [
   body("name").notEmpty().withMessage("O nome é obrigatório"),
   body("email").isEmail().withMessage("Preencha seu email"),
@@ -18,10 +15,10 @@ export const validateRegisterFields = [
     const erros = validationResult(req);
     if (!erros.isEmpty()) {
       return res.status(400).json({
-        erros: erros.array().map((i: ErrorResponse) => {
+        erros: erros.array().map((i: any) => {
           return {
-            msg: i.msg,
             path: i.path,
+            msg: i.msg,
           };
         }),
       });

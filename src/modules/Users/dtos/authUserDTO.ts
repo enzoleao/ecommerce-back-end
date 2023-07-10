@@ -7,6 +7,8 @@ export interface AuthUserDTO {
     birthday: Date;
     cpf: string;
     password: undefined;
+    roles: string;
+    roleId: undefined;
   };
   token: string;
 }

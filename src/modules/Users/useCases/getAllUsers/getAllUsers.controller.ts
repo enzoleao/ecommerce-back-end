@@ -6,7 +6,7 @@ export class GetAllUsersController {
   async handle(req: Request, res: Response): Promise<Response> {
     const getAllUsersUseCase = new GetAllUsersUseCase(new UserRepository());
 
-    const createEmployee = await getAllUsersUseCase.execute();
-    return res.status(201).json(createEmployee);
+    const getAllUsers = await getAllUsersUseCase.execute();
+    return res.status(200).json(getAllUsers);
   }
 }

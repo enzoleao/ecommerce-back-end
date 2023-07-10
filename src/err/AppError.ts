@@ -1,8 +1,12 @@
+export interface Erros {
+  msg: string;
+  path: string;
+}
 export class AppError {
-  public readonly message: string[];
+  public readonly message: Erros[];
   public readonly statusCode: number;
 
-  constructor(message: string[], statusCode = 400) {
+  constructor(message: Erros[], statusCode = 400) {
     this.message = message;
     this.statusCode = statusCode;
   }

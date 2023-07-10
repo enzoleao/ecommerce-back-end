@@ -6,10 +6,19 @@ import Routes from "./routes/routes";
 import { AppError } from "./err/AppError";
 import swaggerUi from "swagger-ui-express";
 import swaggerDocument from "./swagger.json";
+import { config } from "express-acl";
 
 dotenv.config();
 const app = express();
 const PORT = process.env.PORT;
+
+config({
+  filename: "acl-config.json",
+  baseUrl: "/",
+  defaultRole: "anonymous",
+  decodedObjectName: "name",
+  roleSearchPath: "user.role.name",
+});
 
 app.use(express.json());
 app.use(cors());
@@ -28,10 +37,9 @@ app.use(
   (err: Error, request: Request, response: Response, next: NextFunction) => {
     if (err instanceof AppError) {
       return response.status(err.statusCode).json({
-        message: err.message,
+        erros: err.message,
       });
     }
-
     return response.status(500).json({
       status: "error",
       message: `Internal server error. - ${err.message}`,

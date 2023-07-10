@@ -2,7 +2,7 @@ import { compare } from "bcrypt";
 import { AppError } from "../../../../err/AppError";
 import { IUserRepository } from "../../repositories/User.repository";
 import { sign } from "jsonwebtoken";
-import { AuthUserDTO } from "../../dtos/authUser/authUserDTO";
+import { AuthUserDTO } from "../../dtos/authUserDTO";
 
 interface LoginTypes {
   email: string;
@@ -16,19 +16,40 @@ export class AuthUserUseCase {
     const userExist = await this.userRepository.findUser(email);
 
     if (!userExist) {
-      throw new AppError(["Email e/ou senha estão incorretos!!"], 401);
+      throw new AppError(
+        [{ msg: "E-mail e/ou senha estão incorretos!!", path: "any" }],
+        400
+      );
     }
-    const passwordMatch = await compare(password, userExist.password);
-
+    console.log(userExist);
+    const passwordMatch = compare(password, userExist.password);
     if (!passwordMatch) {
-      throw new AppError(["Email e/ou senha estão incorretos!!"], 401);
+      throw new AppError(
+        [{ msg: "E-mail e/ou senha estão incorretos!!", path: "any" }],
+        400
+      );
     }
+    console.log(userExist);
+    const token = sign(
+      {
+        id: userExist.id,
+        role: userExist.roles,
+      },
+      `${process.env.JWTSECRET}`,
+      {
+        subject: String(userExist.id),
+        expiresIn: 7200,
+      }
+    );
 
-    const token = sign({}, `${process.env.JWTSECRET}`, {
-      subject: String(userExist.id),
-      expiresIn: 7200,
-    });
-
-    return { user: { ...userExist, password: undefined }, token };
+    return {
+      user: {
+        ...userExist,
+        password: undefined,
+        roleId: undefined,
+        roles: userExist.roles,
+      },
+      token,
+    };
   }
 }

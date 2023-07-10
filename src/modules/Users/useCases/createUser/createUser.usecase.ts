@@ -1,7 +1,9 @@
 import { hash } from "bcrypt";
 import { IUserRepository } from "../../repositories/User.repository";
-import { CreateUserRequestDTO } from "../../dtos/createUser/createUserRequestDTO";
-import { CreateUserResponseDTO } from "../../dtos/createUser/createUserResponseDTO";
+import {
+  CreateUserRequestDTO,
+  CreateUserResponseDTO,
+} from "../../dtos/createUserDTO";
 
 export class CreateUserUseCase {
   constructor(private userRepository: IUserRepository) {}
