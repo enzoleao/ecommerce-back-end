@@ -3,9 +3,9 @@ import cors from "cors";
 import * as dotenv from "dotenv";
 import express, { NextFunction, Request, Response } from "express";
 import Routes from "./routes/routes";
-import { AppError } from "./err/AppError";
 import swaggerUi from "swagger-ui-express";
 import swaggerDocument from "./swagger.json";
+import { AppError } from "./err/AppError";
 import { config } from "express-acl";
 
 dotenv.config();
@@ -18,6 +18,16 @@ config({
   defaultRole: "anonymous",
   decodedObjectName: "name",
   roleSearchPath: "user.role.name",
+  denyCallback: (res: any) => {
+    return res.status(403).json({
+      erros: [
+        {
+          msg: "Access Denied",
+          path: "authorization",
+        },
+      ],
+    });
+  },
 });
 
 app.use(express.json());

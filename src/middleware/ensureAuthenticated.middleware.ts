@@ -18,7 +18,10 @@ export const EnsureAuthenticateMiddleware = (
 ) => {
   const { authorization } = req.headers;
 
-  const routesIgnoredByJWT = [{ path: "/users", methods: ["POST"] }];
+  const routesIgnoredByJWT = [
+    { path: "/users", methods: ["POST"] },
+    { path: "/session", methods: ["POST"] },
+  ];
 
   const isRouteIgnored = routesIgnoredByJWT.find((rota) => {
     return rota.path === req.path && rota.methods.includes(req.method);

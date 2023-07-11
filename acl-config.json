@@ -5,7 +5,7 @@
       {
         "resource": "*",
         "methods": "*",
-        "action": "deny"
+        "action": "allow"
       }
     ]
   },
@@ -20,7 +20,7 @@
       {
         "resource": ["users"],
         "methods": ["GET", "POST", "DELETE"],
-        "action": "allow"
+        "action": "deny"
       }
     ]
   },
