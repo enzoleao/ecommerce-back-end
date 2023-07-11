@@ -13,8 +13,7 @@ export class AuthUserUseCase {
   constructor(private userRepository: IUserRepository) {}
 
   async execute({ email, password }: LoginTypes): Promise<AuthUserDTO | null> {
-    const userExist = await this.userRepository.findUser(email);
-
+    const userExist: any = await this.userRepository.findUser(email);
     if (!userExist) {
       throw new AppError(
         [{ msg: "E-mail e/ou senha estão incorretos!!", path: "any" }],

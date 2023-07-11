@@ -15,12 +15,12 @@
       {
         "resource": "session",
         "methods": ["*"],
-        "action": "deny"
+        "action": "allow"
       },
       {
         "resource": ["users"],
-        "methods": ["GET", "POST", "DELETE"],
-        "action": "deny"
+        "methods": ["POST"],
+        "action": "allow"
       }
     ]
   },

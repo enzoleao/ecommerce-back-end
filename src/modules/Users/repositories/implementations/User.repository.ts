@@ -10,7 +10,7 @@ import { User } from "@prisma/client";
 
 export class UserRepository implements IUserRepository {
   async findUser(email: string): Promise<User | null> {
-    const response = await prisma.user.findUniqueOrThrow({
+    const response = await prisma.user.findUnique({
       where: {
         email,
       },
