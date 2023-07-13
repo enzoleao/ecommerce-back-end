@@ -18,8 +18,8 @@
         "action": "allow"
       },
       {
-        "resource": ["users"],
-        "methods": ["POST"],
+        "resource": ["users/*"],
+        "methods": ["POST",  "PUT"],
         "action": "allow"
       }
     ]

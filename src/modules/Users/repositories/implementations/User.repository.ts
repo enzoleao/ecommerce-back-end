@@ -7,8 +7,37 @@ import {
 import { AppError } from "../../../../err/AppError";
 import { GetAllUsersDTO } from "../../dtos/getAllUsersDTO";
 import { User } from "@prisma/client";
+import {
+  UpdateUserRequestDTO,
+  UpdateUserResponseDTO,
+} from "../../dtos/updateUserDTO";
 
 export class UserRepository implements IUserRepository {
+  async updateUser(
+    updateUser: UpdateUserRequestDTO
+  ): Promise<UpdateUserResponseDTO | null> {
+    const { id, name, email, password, phone, birthday } = updateUser;
+
+    const findUser = await prisma.user.findUniqueOrThrow({
+      where: {
+        id,
+      },
+    });
+    const response = await prisma.user.update({
+      data: {
+        name: name || findUser.name,
+        email: email || findUser.email,
+        phone: phone || findUser.phone,
+        birthday: birthday || findUser.birthday,
+        password: password || findUser.password,
+      },
+      where: {
+        id,
+      },
+    });
+    return { ...response, password: undefined };
+  }
+
   async findUser(email: string): Promise<User | null> {
     const response = await prisma.user.findUnique({
       where: {
